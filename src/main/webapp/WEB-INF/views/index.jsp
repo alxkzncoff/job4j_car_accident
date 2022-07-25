@@ -32,14 +32,34 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
-    <div class="row">
+    <div class="row pt-3">
         <table class="table">
-            <c:forEach var="el" items="${list}" varStatus="сounter" >
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Правонарушение</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Адрес</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="accident" items="${accidents}">
                 <tr>
-                    <td>${сounter.count}</td>
-                    <td>${el}</td>
+                    <td>
+                        <c:out value="${accident.id}"/>
+                    </td>
+                    <td>
+                        <c:out value="${accident.name}"/>
+                    </td>
+                    <td>
+                        <c:out value="${accident.text}"/>
+                    </td>
+                    <td>
+                        <c:out value="${accident.address}"/>
+                    </td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
     </div>
 </div>
