@@ -5,22 +5,16 @@ import ru.job4j.accident.model.Accident;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem {
+    private final AtomicInteger id = new AtomicInteger(0);
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
 
-    public AccidentMem() {
-        accidents.put(1, new Accident(1, "Превышение скорости",
-                "Превышение скорости на 20-40 км/ч.", "г. Санкт-Петербург"));
-        accidents.put(2, new Accident(2, "Парковка в неположенном месте",
-                "Парковка на месте для инвалидов.", "г. Санкт-Петербург"));
-        accidents.put(3, new Accident(3, "Нарушение разметки",
-                "Выезд через двойную сплошную на встречную полосу.", "г. Санкт-Петербург"));
-    }
-
-    public void add(int id, Accident accident) {
-        accidents.put(id, accident);
+    public void add(Accident accident) {
+        accident.setId(id.incrementAndGet());
+        accidents.put(accident.getId(), accident);
     }
 
     public Accident findById(int id) {
