@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:useBean id="types" scope="request" type="java.util.List"/>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -46,6 +49,14 @@
                 <div class="form-group">
                     <label for="address">Адрес</label>
                     <input type="text" class="form-control" name="address" id="address">
+                </div>
+                <div class="form-group">
+                    <label for="type.id">Тип</label>
+                    <select class="form-control" id="type.id" name="type.id">
+                        <c:forEach var="type" items="${types}">
+                            <option value="${type.id}">${type.name}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>

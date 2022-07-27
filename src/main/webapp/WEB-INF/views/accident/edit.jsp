@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean id="accident" scope="request" type="ru.job4j.accident.model.Accident"/>
+<jsp:useBean id="types" scope="request" type="java.util.List"/>
 
 <html>
 <head>
@@ -41,6 +42,14 @@
                 <div class="form-group">
                     <label for="name">Название</label>
                     <input type="text" class="form-control" name="name" id="name" value="${accident.name}">
+                </div>
+                <div class="form-group">
+                    <label for="type.id">Тип</label>
+                    <select class="form-control" id="type.id" name="type.id">
+                        <c:forEach var="type" items="${types}">
+                            <option value="${type.id}">${type.name}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <input type="hidden" name="text" value="${accident.text}"/>
                 <input type="hidden" name="address" value="${accident.address}"/>

@@ -42,6 +42,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Правонарушение</th>
+                <th scope="col">Тип</th>
                 <th scope="col">Описание</th>
                 <th scope="col">Адрес</th>
             </tr>
@@ -57,6 +58,9 @@
                         <span>
                             <a href="<c:url value='/edit?id=${accident.id}'/>">Ред.</a>
                         </span>
+                    </td>
+                    <td>
+                        <c:out value="${accident.type.name}"/>
                     </td>
                     <td>
                         <c:out value="${accident.text}"/>

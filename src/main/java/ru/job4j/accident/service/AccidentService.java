@@ -2,6 +2,7 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.repository.AccidentMem;
 
 import java.util.List;
@@ -46,5 +47,22 @@ public class AccidentService {
      */
     public List<Accident> findAll() {
         return store.findAll();
+    }
+
+    /**
+     * Метод возвращает тип инцидента по id.
+     * @param id Идентификационный номер типа.
+     * @return Найденный тип инцидента.
+     */
+    public AccidentType findTypeById(int id) {
+        return store.findTypeById(id);
+    }
+
+    /**
+     * Метод возвращает список типов инцидентов.
+     * @return Список типов.
+     */
+    public List<AccidentType> findAllTypes() {
+        return store.findAllTypes();
     }
 }
