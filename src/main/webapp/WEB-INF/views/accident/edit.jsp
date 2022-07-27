@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: KuzAS
-  Date: 25.07.2022
-  Time: 11:01
+  Date: 26.07.2022
+  Time: 16:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="accidents" scope="request" type="java.util.List"/>
+<jsp:useBean id="accident" scope="request" type="ru.job4j.accident.model.Accident"/>
 
 <html>
 <head>
@@ -28,7 +28,6 @@
     <title>Accident</title>
 </head>
 <body>
-
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Spring MVC</a>
@@ -36,41 +35,18 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
-    <div class="row pt-3">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Правонарушение</th>
-                <th scope="col">Описание</th>
-                <th scope="col">Адрес</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="accident" items="${accidents}">
-                <tr>
-                    <td>
-                        <c:out value="${accident.id}"/>
-                    </td>
-                    <td>
-                        <c:out value="${accident.name}"/>
-                        <span>
-                            <a href="<c:url value='/edit?id=${accident.id}'/>">Ред.</a>
-                        </span>
-                    </td>
-                    <td>
-                        <c:out value="${accident.text}"/>
-                    </td>
-                    <td>
-                        <c:out value="${accident.address}"/>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-    <div class="row pt-3">
-        <a class="btn btn-primary" href="<c:url value='/create'/>" role="button">Добавить инцидент</a>
+    <div class="card" style="width: 100%">
+        <div class="card-body">
+            <form  action="<c:url value='/update?id=${accident.id}'/>" method='POST'>
+                <div class="form-group">
+                    <label for="name">Название</label>
+                    <input type="text" class="form-control" name="name" id="name" value="${accident.name}">
+                </div>
+                <input type="hidden" name="text" value="${accident.text}"/>
+                <input type="hidden" name="address" value="${accident.address}"/>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>
