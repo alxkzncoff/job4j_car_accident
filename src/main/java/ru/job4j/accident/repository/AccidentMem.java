@@ -35,7 +35,7 @@ public class AccidentMem {
      * @param accident Инцидент с новыми данными.
      */
     public void update(int id, Accident accident) {
-        accidents.put(id, accident);
+        accidents.replace(id, accident);
     }
 
     /**
