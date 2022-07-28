@@ -3,6 +3,7 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +14,15 @@ public class AccidentMem {
     private final AtomicInteger id = new AtomicInteger(0);
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
     private final HashMap<Integer, AccidentType> types = new HashMap<>();
+    private final HashMap<Integer, Rule> rules = new HashMap<>();
 
     public AccidentMem() {
         types.put(1, AccidentType.of(1, "Две машины"));
         types.put(2, AccidentType.of(2, "Машина и человек"));
         types.put(3, AccidentType.of(3, "Машина и велосипед"));
+        rules.put(1, Rule.of(1, "Статья. 1"));
+        rules.put(2, Rule.of(2, "Статья. 2"));
+        rules.put(3, Rule.of(3, "Статья. 3"));
     }
 
     /**
@@ -70,5 +75,22 @@ public class AccidentMem {
      */
     public List<AccidentType> findAllTypes() {
         return types.values().stream().toList();
+    }
+
+    /**
+     * Метод возвращает статью по id из хранилища.
+     * @param id Идентификационный номер статьи.
+     * @return Найденная статья.
+     */
+    public Rule findRuleById(int id) {
+        return rules.get(id);
+    }
+
+    /**
+     * Метод возвращает список всех статей из хранилища.
+     * @return Список статей.
+     */
+    public List<Rule> findAllRules() {
+        return rules.values().stream().toList();
     }
 }

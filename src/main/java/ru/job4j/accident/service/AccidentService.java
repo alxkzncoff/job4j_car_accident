@@ -3,6 +3,7 @@ package ru.job4j.accident.service;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentMem;
 
 import java.util.List;
@@ -64,5 +65,22 @@ public class AccidentService {
      */
     public List<AccidentType> findAllTypes() {
         return store.findAllTypes();
+    }
+
+    /**
+     * Метод возвращает статью по id.
+     * @param id Идентификационный номер статьи.
+     * @return Найденная статья.
+     */
+    public Rule findRuleById(int id) {
+        return store.findRuleById(id);
+    }
+
+    /**
+     * Метод возвращает список всех статей.
+     * @return Список статей.
+     */
+    public List<Rule> findAllRules() {
+        return store.findAllRules();
     }
 }

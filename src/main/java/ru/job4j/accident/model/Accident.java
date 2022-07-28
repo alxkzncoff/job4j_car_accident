@@ -1,6 +1,7 @@
 package ru.job4j.accident.model;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Класс правонарушение.
@@ -13,12 +14,14 @@ public class Accident {
     private String text;
     private String address;
     private AccidentType type;
+    private Set<Rule> rules;
 
-    public Accident(String name, String text, String address, AccidentType type) {
+    public Accident(String name, String text, String address, AccidentType type, Set<Rule> rules) {
         this.name = name;
         this.text = text;
         this.address = address;
         this.type = type;
+        this.rules = rules;
     }
 
     public int getId() {
@@ -61,6 +64,14 @@ public class Accident {
         this.type = type;
     }
 
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(Set<Rule> rules) {
+        this.rules = rules;
+    }
+
     @Override
     public String toString() {
         return "Accident: "
@@ -68,7 +79,8 @@ public class Accident {
                 + ", name=" + name
                 + ", text=" + text
                 + ", address=" + address
-                + ", type: " + type;
+                + ", type: " + type
+                + ", rules: " + rules;
     }
 
     @Override

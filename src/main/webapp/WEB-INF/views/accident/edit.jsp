@@ -10,6 +10,7 @@
 
 <jsp:useBean id="accident" scope="request" type="ru.job4j.accident.model.Accident"/>
 <jsp:useBean id="types" scope="request" type="java.util.List"/>
+<jsp:useBean id="rules" scope="request" type="java.util.List"/>
 
 <html>
 <head>
@@ -48,6 +49,14 @@
                     <select class="form-control" id="type.id" name="type.id">
                         <c:forEach var="type" items="${types}">
                             <option value="${type.id}">${type.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rule.id">Статья</label>
+                    <select class="form-control" id="rule.id" name="ruleIds" multiple="multiple">
+                        <c:forEach var="rule" items="${rules}">
+                            <option value="${rule.id}">${rule.name}</option>
                         </c:forEach>
                     </select>
                 </div>
