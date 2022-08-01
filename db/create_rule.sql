@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS rules (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+INSERT INTO rules(name) VALUES ('Статья. 1');
+INSERT INTO rules(name) VALUES ('Статья. 2');
+INSERT INTO rules(name) VALUES ('Статья. 3');

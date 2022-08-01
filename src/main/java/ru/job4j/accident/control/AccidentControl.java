@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 
@@ -44,9 +43,7 @@ public class AccidentControl {
     @PostMapping("/update")
     public String update(@RequestParam("id") int id, @ModelAttribute Accident accident,
                          HttpServletRequest req) {
-        Accident rsl;
-        rsl = addTypeAndRules(accident, req);
-        accidentService.update(id, rsl);
+        accidentService.update(id, addTypeAndRules(accident, req));
         return "redirect:/";
     }
 
@@ -57,7 +54,6 @@ public class AccidentControl {
      * @return Обновленный объект класса Accident
      */
     private Accident addTypeAndRules(Accident accident, HttpServletRequest req) {
-        List<AccidentType> types = accidentService.findAllTypes();
         Set<Rule> rules = new HashSet<>();
         String[] ids = req.getParameterValues("ruleIds");
         accident.setType(accidentService.findTypeById(accident.getType().getId()));
