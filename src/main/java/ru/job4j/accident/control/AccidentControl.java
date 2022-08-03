@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
+import ru.job4j.accident.service.RuleService;
+import ru.job4j.accident.service.TypeService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -13,15 +15,19 @@ import java.util.*;
 @Controller
 public class AccidentControl {
     private final AccidentService accidentService;
+    private final TypeService typeService;
+    private final RuleService ruleService;
 
-    public AccidentControl(AccidentService accidentService) {
+    public AccidentControl(AccidentService accidentService, TypeService typeService, RuleService ruleService) {
         this.accidentService = accidentService;
+        this.typeService = typeService;
+        this.ruleService = ruleService;
     }
 
     @GetMapping("/create")
     public String createForm(Model model) {
-        model.addAttribute("types", accidentService.findAllTypes());
-        model.addAttribute("rules", accidentService.findAllRules());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("rules", ruleService.findAll());
         return "accident/create";
     }
 
@@ -35,15 +41,15 @@ public class AccidentControl {
     public String updateForm(@RequestParam("id") int id, Model model) {
         Accident accident = accidentService.findById(id);
         model.addAttribute("accident", accident);
-        model.addAttribute("types", accidentService.findAllTypes());
-        model.addAttribute("rules", accidentService.findAllRules());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("rules", ruleService.findAll());
         return "accident/edit";
     }
 
     @PostMapping("/update")
     public String update(@RequestParam("id") int id, @ModelAttribute Accident accident,
                          HttpServletRequest req) {
-        accidentService.update(id, addTypeAndRules(accident, req));
+        accidentService.update(addTypeAndRules(accident, req));
         return "redirect:/";
     }
 
@@ -56,11 +62,11 @@ public class AccidentControl {
     private Accident addTypeAndRules(Accident accident, HttpServletRequest req) {
         Set<Rule> rules = new HashSet<>();
         String[] ids = req.getParameterValues("ruleIds");
-        accident.setType(accidentService.findTypeById(accident.getType().getId()));
+        accident.setType(typeService.findById(accident.getType().getId()));
         if (ids != null) {
-            Arrays.stream(ids).forEach(ruleId -> rules.add(accidentService.findRuleById(Integer.parseInt(ruleId))));
+            Arrays.stream(ids).forEach(ruleId -> rules.add(ruleService.findById(Integer.parseInt(ruleId))));
+            rules.forEach(accident::addRule);
         }
-        accident.setRules(rules);
         return accident;
     }
 }

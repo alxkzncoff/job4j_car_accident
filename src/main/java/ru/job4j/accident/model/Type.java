@@ -1,13 +1,18 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class AccidentType {
+@Entity
+@Table(name = "types")
+public class Type {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    public static AccidentType of(int id, String name) {
-        AccidentType type = new AccidentType();
+    public static Type of(int id, String name) {
+        Type type = new Type();
         type.id = id;
         type.name = name;
         return type;
@@ -44,7 +49,7 @@ public class AccidentType {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AccidentType that = (AccidentType) o;
+        Type that = (Type) o;
         return id == that.id;
     }
 

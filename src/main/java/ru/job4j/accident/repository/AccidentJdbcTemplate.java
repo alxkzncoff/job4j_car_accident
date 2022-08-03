@@ -5,7 +5,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Type;
 import ru.job4j.accident.model.Rule;
 
 import java.sql.PreparedStatement;
@@ -83,10 +83,10 @@ public class AccidentJdbcTemplate {
      * @param id Идентификационный номер типа.
      * @return Найденный тип инцидента.
      */
-    public AccidentType findTypeById(int id) {
+    public Type findTypeById(int id) {
         return jdbc.queryForObject("SELECT id, name FROM types WHERE id = ?",
                 (rs, row) -> {
-                    AccidentType type = new AccidentType();
+                    Type type = new Type();
                     type.setId(rs.getInt("id"));
                     type.setName(rs.getString("name"));
                     return type;
@@ -98,10 +98,10 @@ public class AccidentJdbcTemplate {
      * Метод возвращает список всех типов инцидентов из БД.
      * @return Список типов инцидентов.
      */
-    public List<AccidentType> findAllTypes() {
+    public List<Type> findAllTypes() {
         return jdbc.query("SELECT id, name FROM types",
                 (rs, row) -> {
-                    AccidentType type = new AccidentType();
+                    Type type = new Type();
                     type.setId(rs.getInt("id"));
                     type.setName(rs.getString("name"));
                     return type;
@@ -160,7 +160,7 @@ public class AccidentJdbcTemplate {
                     accident.setName(rs.getString("name"));
                     accident.setText(rs.getString("text"));
                     accident.setAddress(rs.getString("address"));
-                    AccidentType type = new AccidentType();
+                    Type type = new Type();
                     type.setId(rs.getInt("type_id"));
                     accident.setType(type);
                     return accident;
