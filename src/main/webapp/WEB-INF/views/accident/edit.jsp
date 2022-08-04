@@ -11,6 +11,7 @@
 <jsp:useBean id="accident" scope="request" type="ru.job4j.accident.model.Accident"/>
 <jsp:useBean id="types" scope="request" type="java.util.List"/>
 <jsp:useBean id="rules" scope="request" type="java.util.List"/>
+<jsp:useBean id="username" scope="request" type="java.lang.String"/>
 
 <html>
 <head>
@@ -36,6 +37,13 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <a class="nav-item nav-link">
+                <span>
+                    <a href="<c:url value='/logout'/>"> <c:out value="${username}"/> | Выйти</a>
+                </span>
+            </a>
+        </div>
     </nav>
     <div class="card" style="width: 100%">
         <div class="card-body">
