@@ -1,16 +1,19 @@
 package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.RuleHibernate;
+import ru.job4j.accident.repository.RuleRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RuleService {
-    private final RuleHibernate store;
+    private final RuleRepository store;
 
-    public RuleService(RuleHibernate store) {
+    public RuleService(RuleRepository store) {
         this.store = store;
     }
 
@@ -19,8 +22,9 @@ public class RuleService {
      * @param rule Статья.
      * @return Добавленная статья.
      */
+    @Transactional
     public Rule add(Rule rule) {
-        return store.add(rule);
+        return store.save(rule);
     }
 
     /**
@@ -28,7 +32,8 @@ public class RuleService {
      * @param id Идентификационный номер статьи.
      * @return Найденная статья.
      */
-    public Rule findById(int id) {
+    @Transactional
+    public Optional<Rule> findById(int id) {
         return store.findById(id);
     }
 
@@ -36,7 +41,10 @@ public class RuleService {
      * Метод возвращает список всех статей.
      * @return Список статей.
      */
+    @Transactional
     public List<Rule> findAll() {
-        return store.findAll();
+        List<Rule> rules = new ArrayList<>();
+        store.findAll().forEach(rules::add);
+        return rules;
     }
 }

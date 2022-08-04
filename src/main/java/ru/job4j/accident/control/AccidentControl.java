@@ -39,7 +39,7 @@ public class AccidentControl {
 
     @GetMapping("/edit")
     public String updateForm(@RequestParam("id") int id, Model model) {
-        Accident accident = accidentService.findById(id);
+        Accident accident = accidentService.findById(id).get();
         model.addAttribute("accident", accident);
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("rules", ruleService.findAll());
@@ -49,7 +49,7 @@ public class AccidentControl {
     @PostMapping("/update")
     public String update(@RequestParam("id") int id, @ModelAttribute Accident accident,
                          HttpServletRequest req) {
-        accidentService.update(addTypeAndRules(accident, req));
+        accidentService.add(addTypeAndRules(accident, req));
         return "redirect:/";
     }
 
@@ -62,9 +62,9 @@ public class AccidentControl {
     private Accident addTypeAndRules(Accident accident, HttpServletRequest req) {
         Set<Rule> rules = new HashSet<>();
         String[] ids = req.getParameterValues("ruleIds");
-        accident.setType(typeService.findById(accident.getType().getId()));
+        accident.setType(typeService.findById(accident.getType().getId()).get());
         if (ids != null) {
-            Arrays.stream(ids).forEach(ruleId -> rules.add(ruleService.findById(Integer.parseInt(ruleId))));
+            Arrays.stream(ids).forEach(ruleId -> rules.add(ruleService.findById(Integer.parseInt(ruleId)).get()));
             rules.forEach(accident::addRule);
         }
         return accident;

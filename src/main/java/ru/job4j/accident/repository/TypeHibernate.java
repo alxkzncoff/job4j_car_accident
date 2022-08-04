@@ -1,12 +1,14 @@
 package ru.job4j.accident.repository;
 
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Type;
 
 import java.util.List;
 
-@Repository
+/**
+ * Аннотация @Repository убрана в связи с новой реализацией проекта с помощью Spring Data.
+ * Класс не удален в учебных целях.
+ */
 public class TypeHibernate implements Store {
     private final SessionFactory sf;
 

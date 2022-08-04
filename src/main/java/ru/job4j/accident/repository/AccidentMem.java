@@ -1,6 +1,5 @@
 package ru.job4j.accident.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Type;
 import ru.job4j.accident.model.Rule;
@@ -9,7 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+/**
+ * Аннотация @Repository убрана в связи с новой реализацией проекта с помощью Spring Data.
+ * Класс не удален в учебных целях.
+ */
 public class AccidentMem {
     private final AtomicInteger id = new AtomicInteger(0);
     private final HashMap<Integer, Accident> accidents = new HashMap<>();

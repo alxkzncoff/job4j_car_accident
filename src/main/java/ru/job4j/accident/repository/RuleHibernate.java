@@ -6,7 +6,10 @@ import ru.job4j.accident.model.Rule;
 
 import java.util.List;
 
-@Repository
+/**
+ * Аннотация @Repository убрана в связи с новой реализацией проекта с помощью Spring Data.
+ * Класс не удален в учебных целях.
+ */
 public class RuleHibernate implements Store {
     private final SessionFactory sf;
 

@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Аннотация @Repository убрана в связи с новой реализацией проекта с помощью Spring Data.
+ * Класс не удален в учебных целях.
+ */
 public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
 

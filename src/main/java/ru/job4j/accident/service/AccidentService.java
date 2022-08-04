@@ -1,16 +1,19 @@
 package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.repository.AccidentHibernate;
+import ru.job4j.accident.repository.AccidentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccidentService {
-    private final AccidentHibernate store;
+    private final AccidentRepository store;
 
-    public AccidentService(AccidentHibernate store) {
+    public AccidentService(AccidentRepository store) {
         this.store = store;
     }
 
@@ -18,16 +21,9 @@ public class AccidentService {
      * Метод добавляет инцидент.
      * @param accident Инцидент.
      */
+    @Transactional
     public void add(Accident accident) {
-        store.add(accident);
-    }
-
-    /**
-     * Метод обновляет данные инцидента.
-     * @param accident Инцидент с новыми данными.
-     */
-    public void update(Accident accident) {
-        store.update(accident);
+        store.save(accident);
     }
 
     /**
@@ -35,7 +31,8 @@ public class AccidentService {
      * @param id Идентификационный номер инцидента.
      * @return Найденный инцидент.
      */
-    public Accident findById(int id) {
+    @Transactional
+    public Optional<Accident> findById(int id) {
         return store.findById(id);
     }
 
@@ -43,7 +40,10 @@ public class AccidentService {
      * Метод возвращает все инциденты.
      * @return Список инцидентов.
      */
+    @Transactional
     public List<Accident> findAll() {
-        return store.findAll();
+        List<Accident> accidents = new ArrayList<>();
+        store.findAll().forEach(accidents::add);
+        return accidents;
     }
 }
