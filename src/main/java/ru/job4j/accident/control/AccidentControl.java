@@ -1,6 +1,5 @@
 package ru.job4j.accident.control;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +27,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createForm(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("username", auth.getName());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("rules", ruleService.findAll());
         return "accident/create";
@@ -43,8 +41,7 @@ public class AccidentControl {
 
     @GetMapping("/edit")
     public String updateForm(@RequestParam("id") int id, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("username", auth.getName());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Accident accident = accidentService.findById(id).get();
         model.addAttribute("accident", accident);
         model.addAttribute("types", typeService.findAll());

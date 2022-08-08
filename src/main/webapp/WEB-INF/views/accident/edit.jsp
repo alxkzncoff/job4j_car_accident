@@ -11,7 +11,7 @@
 <jsp:useBean id="accident" scope="request" type="ru.job4j.accident.model.Accident"/>
 <jsp:useBean id="types" scope="request" type="java.util.List"/>
 <jsp:useBean id="rules" scope="request" type="java.util.List"/>
-<jsp:useBean id="username" scope="request" type="java.lang.String"/>
+<jsp:useBean id="user" scope="request" type="java.lang.Object"/>
 
 <html>
 <head>
@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <a class="nav-item nav-link">
                 <span>
-                    <a href="<c:url value='/logout'/>"> <c:out value="${username}"/> | Выйти</a>
+                    <a href="<c:url value='/logout'/>"> <c:out value="${user.username}"/> | Выйти</a>
                 </span>
             </a>
         </div>

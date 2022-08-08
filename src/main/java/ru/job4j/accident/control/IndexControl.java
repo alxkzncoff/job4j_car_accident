@@ -17,8 +17,7 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("username", auth.getName());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("accidents", accidentService.findAll());
         return "index";
     }
