@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: KuzAS
-  Date: 04.08.2022
-  Time: 16:55
+  Date: 08.08.2022
+  Time: 17:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <a class="nav-item nav-link">
                 <span>
-                    <a href="<c:url value='/reg'/>"> Регистрация </a>
+                    <a href="<c:url value='/login'/>"> Вход </a>
                 </span>
             </a>
         </div>
@@ -42,15 +42,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Авторизация
+                Регистрация
             </div>
             <div class="card-body">
-                <c:if test="${not empty errorMessage}">
-                    <div class="alert alert-danger" role="alert">
-                            ${errorMessage}
-                    </div>
-                </c:if>
-                <form name='login' action="<c:url value='/login'/>" method='POST'>
+                <form name='login' action="<c:url value='/reg'/>" method='POST'>
                     <div class="form-group">
                         <label>Логин:</label>
                         <input type="text" class="form-control" name="username">
@@ -59,8 +54,7 @@
                         <label>Пароль:</label>
                         <input type="password" class="form-control" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button type="submit" class="btn btn-primary">Зарегистрировать</button>
                 </form>
             </div>
         </div>
