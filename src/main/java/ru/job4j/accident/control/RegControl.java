@@ -23,11 +23,15 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user) {
-        user.setEnabled(true);
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        users.save(user);
-        return "redirect:/login";
+        String fail = "true";
+        if (users.findByName(user.getUsername()).isEmpty()) {
+            user.setEnabled(true);
+            user.setPassword(encoder.encode(user.getPassword()));
+            user.setAuthority(authorities.findByAuthority("ROLE_USER"));
+            users.save(user);
+            fail = "false";
+        }
+        return String.format("redirect:/login?fail=%s", fail);
     }
 
     @GetMapping("/reg")

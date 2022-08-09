@@ -17,6 +17,7 @@ public class LoginControl {
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,
+                            @RequestParam(value = "fail", required = false) String fail,
                             Model model) {
         String errorMessage = null;
         if (error != null) {
@@ -24,6 +25,9 @@ public class LoginControl {
         }
         if (logout != null) {
             errorMessage = "Вы вышли из системы!";
+        }
+        if ("true".equals(fail)) {
+            errorMessage = "Пользователь с таким именем уже существует!";
         }
         model.addAttribute("errorMessage", errorMessage);
         return "login";
