@@ -22,7 +22,19 @@
 
 ## Пример функционирования.
 
-В процессе...
+### 1. Регистрация/Авторизация пользователя:
+
+<details>
+  <summary>Пример успешной регистрации:</summary>
+  <img src="docs/reg.jpg">
+  <img src="docs/reg_success.jpg">
+</details>
+
+<details>
+  <summary>Пример неудачной регистрации одного и того же пользователя два раза:</summary>
+  <img src="docs/reg.jpg">
+  <img src="docs/reg_fail.jpg">
+</details>
 
 [![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot)

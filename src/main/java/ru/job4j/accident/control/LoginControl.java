@@ -20,6 +20,7 @@ public class LoginControl {
                             @RequestParam(value = "fail", required = false) String fail,
                             Model model) {
         String errorMessage = null;
+        String successReg = null;
         if (error != null) {
             errorMessage = "Логин или пароль введены неверно!";
         }
@@ -29,7 +30,11 @@ public class LoginControl {
         if ("true".equals(fail)) {
             errorMessage = "Пользователь с таким именем уже существует!";
         }
+        if ("false".equals(fail)) {
+            successReg = "Регистрация прошла успешно!";
+        }
         model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("successReg", successReg);
         return "login";
     }
 
